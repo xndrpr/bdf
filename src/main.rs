@@ -1,4 +1,5 @@
 use std::env;
+use std::fmt::format;
 use std::fs::File;
 use std::io::{ self, BufRead, BufReader, BufWriter, Write };
 
@@ -15,10 +16,10 @@ fn main() -> io::Result<()> {
 
     let input_path = &args[1];
     let required_height = input_path.split("h").last().unwrap().replace(".dat", "");
-    let output_path = "output.dat";
+    let output_path = format!("output{}.dat", required_height);
 
     let in_file = File::open(input_path)?;
-    let out_file = File::create(output_path)?;
+    let out_file = File::create(&output_path)?;
 
     let reader = BufReader::with_capacity(128 * 1024, in_file);
     let mut writer = BufWriter::with_capacity(128 * 1024, out_file);
