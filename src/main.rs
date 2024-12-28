@@ -41,10 +41,10 @@ fn main() -> io::Result<()> {
     let mut writer = BufWriter::with_capacity(128 * 1024, config.output_file);
     writer.write_all(config.title.as_bytes())?;
 
-    let is_range = config.param.split(":").count() > 1;
+    let is_range = config.param.split("R").count() > 1;
     if is_range {
         let range = config.param
-            .split(":")
+            .split("R")
             .into_iter()
             .map(|x| x.parse::<f64>().unwrap())
             .collect::<Vec<f64>>();
